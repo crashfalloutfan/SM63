@@ -36,30 +36,29 @@
 
   <!-- Game Container for Flash using Ruffle -->
   <div id="game-container">
-    <div id="ruffle-player"></div>
+    <!-- Ruffle Player will be inserted here -->
   </div>
 
   <!-- Fullscreen Button -->
   <button id="fullscreen-btn">Go Fullscreen</button>
 
-  <!-- Ruffle Flash Player Script -->
-  <script src="https://unpkg.com/ruffle.js"></script>
+  <!-- Correct Ruffle Web Package Integration -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <script>
     // Initialize Ruffle Player
     const ruffle = window.RufflePlayer.newest();
     const player = ruffle.createPlayer();
 
     // Set the Flash game file to load
-    const gameFile = "game.swf"; // Path to the Flash game file
+    const gameFile = "game.swf"; // Ensure the file is correctly named and located
 
     // Embed the Flash game using Ruffle
-    const ruffleContainer = document.getElementById("ruffle-player");
-    ruffleContainer.appendChild(player);
-    player.load(gameFile);
+    const gameContainer = document.getElementById("game-container");
+    gameContainer.appendChild(player);
+    player.load(gameFile); // Ensure game file is loaded correctly
 
     // Fullscreen Button Functionality
     document.getElementById("fullscreen-btn").addEventListener("click", function () {
-      const gameContainer = document.getElementById("game-container");
       if (gameContainer.requestFullscreen) {
         gameContainer.requestFullscreen();
       } else if (gameContainer.mozRequestFullScreen) {
