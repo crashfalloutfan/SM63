@@ -10,20 +10,32 @@
       padding: 0;
       overflow: hidden; /* Prevent scrolling */
       background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
     #game-container {
       width: 100%;
       height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #ruffle-player {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
     }
   </style>
 </head>
 <body>
 
   <!-- Game Container for Flash using Ruffle -->
-  <div id="game-container"></div>
+  <div id="game-container">
+    <!-- Ruffle player will be dynamically added here -->
+  </div>
 
   <!-- Ruffle Web Package Integration -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -38,23 +50,29 @@
     // Embed the Flash game using Ruffle
     const gameContainer = document.getElementById("game-container");
     gameContainer.appendChild(player);
-    player.load(gameFile); // Load the SWF game file
 
-    // Wait for the player to be fully initialized and then resize it
-    player.onload = () => {
-      const swfWidth = player.width;
-      const swfHeight = player.height;
+    // Load the SWF game file
+    player.load(gameFile);
 
-      // Resize the game container based on the SWF file's dimensions
-      gameContainer.style.width = `${swfWidth}px`;
-      gameContainer.style.height = `${swfHeight}px`;
+    // Dynamically resize to fit the screen without black bars
+    window.addEventListener('resize', resizeGame);
 
-      // Center the game in the viewport
-      player.style.position = "absolute";
-      player.style.left = "50%";
-      player.style.top = "50%";
-      player.style.transform = "translate(-50%, -50%)";
-    };
+    function resizeGame() {
+      const containerAspect = window.innerWidth / window.innerHeight;
+      const gameAspect = player.offsetWidth / player.offsetHeight;
+
+      if (containerAspect > gameAspect) {
+        player.style.width = 'auto';
+        player.style.height = '100%';
+      } else {
+        player.style.width = '100%';
+        player.style.height = 'auto';
+      }
+    }
+
+    // Initial resize call
+    resizeGame();
   </script>
 </body>
 </html>
+
