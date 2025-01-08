@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super AH</title>
+    <title>Ruffle Flash Emulator</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         body, html {
@@ -14,7 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000; /* Adjust background color as needed */
+            background-color: #000;
         }
         #flash-container {
             width: 100%;
@@ -41,7 +41,11 @@
                 var ruffle = window.RufflePlayer.newest();
                 var player = ruffle.createPlayer();
                 document.getElementById("flash-container").appendChild(player);
-                player.load("game.swf");
+                player.load("game.swf").then(function() {
+                    console.log("SWF file loaded successfully");
+                }).catch(function(error) {
+                    console.error("Error loading SWF file:", error);
+                });
             });
         </script>
     </div>
