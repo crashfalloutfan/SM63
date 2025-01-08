@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden; /* Remove scrolling */
+      overflow: hidden; /* Prevent scrolling */
       background-color: #000;
     }
     #game-container {
@@ -38,7 +38,23 @@
     // Embed the Flash game using Ruffle
     const gameContainer = document.getElementById("game-container");
     gameContainer.appendChild(player);
-    player.load(gameFile); // Ensure game file is loaded correctly
+    player.load(gameFile); // Load the SWF game file
+
+    // Wait for the player to be fully initialized and then resize it
+    player.onload = () => {
+      const swfWidth = player.width;
+      const swfHeight = player.height;
+
+      // Resize the game container based on the SWF file's dimensions
+      gameContainer.style.width = `${swfWidth}px`;
+      gameContainer.style.height = `${swfHeight}px`;
+
+      // Center the game in the viewport
+      player.style.position = "absolute";
+      player.style.left = "50%";
+      player.style.top = "50%";
+      player.style.transform = "translate(-50%, -50%)";
+    };
   </script>
 </body>
 </html>
