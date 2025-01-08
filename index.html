@@ -34,24 +34,28 @@
 <body>
   <h1 style="text-align: center; color: white;">Play the Flash Game</h1>
 
-  <!-- Game Container for Flash -->
+  <!-- Game Container for Flash using Ruffle -->
   <div id="game-container">
-    <object id="flash-game" type="application/x-shockwave-flash" width="100%" height="100%">
-      <param name="movie" value="game.swf" />
-      <param name="quality" value="high" />
-      <param name="autoplay" value="true" />
-      <param name="wmode" value="opaque" />
-    </object>
+    <div id="ruffle-player"></div>
   </div>
 
   <!-- Fullscreen Button -->
   <button id="fullscreen-btn">Go Fullscreen</button>
 
+  <!-- Ruffle Flash Player Script -->
   <script src="https://unpkg.com/ruffle.js"></script>
   <script>
     // Initialize Ruffle Player
     const ruffle = window.RufflePlayer.newest();
     const player = ruffle.createPlayer();
+
+    // Set the Flash game file to load
+    const gameFile = "game.swf"; // Path to the Flash game file
+
+    // Embed the Flash game using Ruffle
+    const ruffleContainer = document.getElementById("ruffle-player");
+    ruffleContainer.appendChild(player);
+    player.load(gameFile);
 
     // Fullscreen Button Functionality
     document.getElementById("fullscreen-btn").addEventListener("click", function () {
