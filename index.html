@@ -2,77 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flash Game</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* Prevent scrolling */
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100vw;
-    }
-    #game-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
-    #ruffle-player {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* Maintain aspect ratio without black bars */
-    }
-  </style>
+  <meta name="title" content="Ruffle Example">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <title>Ruffle Example</title>
+  <script src="main.js"></script>
+  <noscript>Your browser doesn't have JavaScript enabled. Please enable JavaScript or switch to a browser that
+    supports it.</noscript>
 </head>
 <body>
-
-  <!-- Game Container for Flash using Ruffle -->
-  <div id="game-container"></div>
-
-  <!-- Ruffle Web Package Integration -->
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <script>
-    // Initialize Ruffle Player
-    const ruffle = window.RufflePlayer.newest();
-    const player = ruffle.createPlayer();
-
-    // Set the Flash game file to load
-    const gameFile = "game.swf"; // Ensure the file is correctly named and located
-
-    // Embed the Flash game using Ruffle
-    const gameContainer = document.getElementById("game-container");
-    gameContainer.appendChild(player);
-    
-    // Load the SWF game file
-    player.load(gameFile);
-
-    // Resize function to fit the game to the screen
-    function resizeGame() {
-      const gameAspect = player.width / player.height;
-      const windowAspect = window.innerWidth / window.innerHeight;
-
-      if (windowAspect > gameAspect) {
-        player.style.width = 'auto';
-        player.style.height = '100%';
-      } else {
-        player.style.width = '100%';
-        player.style.height = 'auto';
-      }
-    }
-
-    // Attach event listener to resize the game when window size changes
-    window.addEventListener('resize', resizeGame);
-
-    // Call resizeGame initially to size the game on page load
-    resizeGame();
-  </script>
+<div id='ruffle' class="gameloc"></div>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<script id = "gabe">swfobject.embedSWF("../ruffle-example/flashfiles/1on1soccer.swf", 'ruffle', 800, 600);</script>
 </body>
 </html>
