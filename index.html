@@ -3,46 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flash Game Hub</title>
+  <title>Flash Game</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      overflow: hidden; /* Remove scrolling */
       background-color: #000;
     }
     #game-container {
       width: 100vw;
       height: 100vh;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      background-color: #000;
-    }
-    #fullscreen-btn {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 10px 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      border: none;
-      cursor: pointer;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align: center; color: white;">Play the Flash Game</h1>
 
   <!-- Game Container for Flash using Ruffle -->
-  <div id="game-container">
-    <!-- Ruffle Player will be inserted here -->
-  </div>
+  <div id="game-container"></div>
 
-  <!-- Fullscreen Button -->
-  <button id="fullscreen-btn">Go Fullscreen</button>
-
-  <!-- Correct Ruffle Web Package Integration -->
+  <!-- Ruffle Web Package Integration -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <script>
     // Initialize Ruffle Player
@@ -56,19 +39,6 @@
     const gameContainer = document.getElementById("game-container");
     gameContainer.appendChild(player);
     player.load(gameFile); // Ensure game file is loaded correctly
-
-    // Fullscreen Button Functionality
-    document.getElementById("fullscreen-btn").addEventListener("click", function () {
-      if (gameContainer.requestFullscreen) {
-        gameContainer.requestFullscreen();
-      } else if (gameContainer.mozRequestFullScreen) {
-        gameContainer.mozRequestFullScreen(); // Firefox
-      } else if (gameContainer.webkitRequestFullscreen) {
-        gameContainer.webkitRequestFullscreen(); // Chrome
-      } else if (gameContainer.msRequestFullscreen) {
-        gameContainer.msRequestFullscreen(); // IE/Edge
-      }
-    });
   </script>
 </body>
 </html>
