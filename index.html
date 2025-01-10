@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <script>
-    window.onbeforeunload = e => {
-    var dialogText = 'Do you really want to leave this site?';
-    e.returnValue = dialogText;
-    return dialogText;
+    window.onbeforeunload = () => {
+  return true;
 };
   </script>
   <meta charset="UTF-8">
