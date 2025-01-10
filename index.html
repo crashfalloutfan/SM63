@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <script>
-    window.onbeforeunload = () => {
-  return true;
-};
+    window.addEventListener('beforeunload', ev => {
+      ev.returnValue = 'Are You Sure You Want to Leave';
+    });
   </script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
